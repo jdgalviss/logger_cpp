@@ -1,3 +1,6 @@
 #pragma once
+#include "configuration.h"
 
-void PrintMessage();
+namespace logger{
+    void PrintMessage();
+}

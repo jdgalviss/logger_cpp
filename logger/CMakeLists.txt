@@ -11,7 +11,8 @@ include_directories(
 
 # add the executable
 add_executable(Logger src/application.cc
-  src/logger.cc)
+  src/logger.cc
+  src/configuration.cc)
 
 target_include_directories(Logger PUBLIC
                            "${PROJECT_BINARY_DIR}"
