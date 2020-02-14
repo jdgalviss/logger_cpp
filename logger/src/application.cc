@@ -2,5 +2,5 @@
 #include "configuration.h"
 
 int main(){
-    logger::PrintMessage();
+    cr::PrintMessage();
 }

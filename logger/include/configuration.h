@@ -13,7 +13,7 @@
 
 
 
-//namespace logger {
+namespace cr {
     class Configuration{
         public:
             Configuration();
@@ -27,4 +27,4 @@
             bool log_to_file_ = false;
             bool log_to_terminal_ = true;
     };
-//}
+}

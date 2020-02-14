@@ -1,7 +1,7 @@
 #include "configuration.h"
 
-//namespace logger
-//{
+namespace cr
+{
 Configuration::Configuration()
 {
     std::cout << "Creating config..." << std::endl;
@@ -71,4 +71,4 @@ bool Configuration::parseLine(std::string *line)
     }
 }
 
-//} // namespace logger
+}
