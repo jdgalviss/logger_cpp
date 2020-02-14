@@ -18,9 +18,10 @@ namespace cr {
         public:
             Configuration();
             bool ParseFile(const std::string& configuration_file);
+            bool IsToFile();
+            bool IsToTerminal();
 
         private:
-            bool IsComment(const std::string& line);
             bool parseLine(std::string *line);
 
             std::string log_path_;

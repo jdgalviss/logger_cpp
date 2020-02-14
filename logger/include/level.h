@@ -16,6 +16,7 @@ enum class Level : unsigned int
 
 class LevelHelper
 {
+    public:
     inline static const char *ConvertToString(Level level)
     {
         // Do not use switch over strongly typed enums because Intel C++ compilers dont support them yet.

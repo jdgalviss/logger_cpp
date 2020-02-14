@@ -1,4 +1,5 @@
 #include "logger.h"
+#include "color_modifier.h"
 
 namespace cr
 {
@@ -7,48 +8,35 @@ Logger::Logger(std::string configuration_file_name)
     configuration_ = new Configuration();
     configuration_->ParseFile(configuration_file_name);
 }
+const void Logger::LogTerminal(Level level, const char* log_msg){
+    Color::Modifier red(Color::FG_RED);
+    Color::Modifier green(Color::FG_GREEN);
+    Color::Modifier yellow(Color::FG_BLUE);
+    Color::Modifier def(Color::FG_DEFAULT);
+    switch(level){
+        case Level::Info:
+        std::cout << def << log_msg << std::endl;
+        break;
 
-template <typename T>
-void Logger::Log(Level level, const char* msg, const T &value)
-{
-    const char* level_string = LevelHelper::ConvertToString(level);
-    std::string log_msg;
-    //Go through all msg
-    while(*msg){
-        if(*msg == FORMAT_SPECIFIER_CHARACTER){
-            ++msg;
-        }
-        else
-        {
-            if(*msg == VALUE_SPECIFIER_CHARACTER){
-                ++msg;
-                //append value to string
-            }
-        }
-    //append current character from msg to string
-    ++msg;
+        case Level::Debug:
+        std::cout << green << log_msg << std::endl;
+        break;
+
+        case Level::Warning:
+        std::cout << yellow << log_msg << std::endl;
+        break;
+
+        case Level::Error:
+        std::cout << red << log_msg << std::endl;
+        break;
+
+        case Level::Fatal:
+        std::cout << red << log_msg << std::endl;
+        break;
+        default:
+        std::cout << def << log_msg << std::endl;
+        break;
     }
-    //check if to terminal and if to file and send
-
-    
-}
-
-template <typename T>
-void Logger::Log(Level level, const T &value)
-{
-    
-}
-
-void Logger::Log(Level level, const char* msg)
-{
-    
-}
-
-void PrintMessage()
-{
-    std::cout << "Hello World" << std::endl;
-    cr::Configuration *config = new Configuration();
-    config->ParseFile("/home/jdgalviss/jdgalviss/testCRJapan/logger_cpp/test.conf");
 }
 
 } // namespace cr

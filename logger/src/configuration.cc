@@ -7,8 +7,11 @@ Configuration::Configuration()
     std::cout << "Creating config..." << std::endl;
 }
 
-bool Configuration::IsComment(const std::string &line)
-{
+bool Configuration::IsToFile(){
+    return log_to_file_;
+}
+bool Configuration::IsToTerminal(){
+    return log_to_terminal_;
 }
 
 bool Configuration::ParseFile(const std::string &configuration_file)
