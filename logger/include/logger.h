@@ -1,8 +1,10 @@
 #pragma once
 #include "configuration.h"
 #include "level.h"
+#include "color_modifier.h"
 #include <ctime>
-#include <sstream>
+#include <fstream>
+#include <mutex>
 
 #define FORMAT_SPECIFIER_CHARACTER '%'
 #define VALUE_SPECIFIER_CHARACTER 'v'
@@ -12,6 +14,7 @@ namespace cr
 class Logger
 {
 public:
+    static int log_count_;
     Logger(std::string configuration_file_name);
 #define LOGGER_LEVEL_DEFINITIONS(FUNCTION_NAME)         \
     template <typename T>                               \
@@ -30,12 +33,13 @@ public:
 private:
     template <typename T>
     void Log(Level, const char *, const T &);
-    const void LogTerminal(Level, const char*);
+    bool LogTerminal (Level, const char*) const;
+    bool LogFile (const char*) const;
     inline std::string GetLogHeader(Level);
     Configuration *configuration_;
-    int log_count_ = 1;
-};
+    std::mutex mtx_;           // mutex for critical section
 
+};
 #define LOGGER_LEVEL(FUNCTION_NAME, LOG_LEVEL)                         \
     template <typename T>                                              \
     inline void Logger::FUNCTION_NAME(const char *msg, const T &value) \
@@ -74,6 +78,7 @@ inline std::string Logger::GetLogHeader(Level level){
 template <typename T>
 void Logger::Log(Level level, const char *msg, const T &value)
 {
+    mtx_.lock();
     std::string log_msg;
     std::stringstream ss;
     ss << GetLogHeader(level);
@@ -92,11 +97,19 @@ void Logger::Log(Level level, const char *msg, const T &value)
         }
     }
     log_msg = ss.str();
+    bool log_success = false;
     if(configuration_->IsToFile())
-        std::cout<<"nonono sisisi";
+        if(LogFile(log_msg.c_str()))
+            log_success = true;
 
     if(configuration_->IsToTerminal())
-        LogTerminal(level, log_msg.c_str());
+        if( LogTerminal(level, log_msg.c_str()) )
+            log_success = true;
+    
+    if(log_success)
+        log_count_++;
+    mtx_.unlock();
+    
 
 }
 

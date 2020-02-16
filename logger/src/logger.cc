@@ -1,5 +1,4 @@
 #include "logger.h"
-#include "color_modifier.h"
 
 namespace cr
 {
@@ -8,7 +7,8 @@ Logger::Logger(std::string configuration_file_name)
     configuration_ = new Configuration();
     configuration_->ParseFile(configuration_file_name);
 }
-const void Logger::LogTerminal(Level level, const char* log_msg){
+
+bool Logger::LogTerminal (Level level, const char* log_msg) const{
     Color::Modifier red(Color::FG_RED);
     Color::Modifier green(Color::FG_GREEN);
     Color::Modifier yellow(Color::FG_BLUE);
@@ -37,6 +37,19 @@ const void Logger::LogTerminal(Level level, const char* log_msg){
         std::cout << def << log_msg << std::endl;
         break;
     }
+    return true;
+}
+
+bool Logger::LogFile (const char* log_msg) const{
+    bool success = true;
+    std::ofstream file;
+    file.open (configuration_->getLogFileName(), std::fstream::in | std::fstream::out | std::fstream::app);
+    if(file.is_open())
+        file << log_msg << "\n";
+    else
+        success = false;
+    file.close();
+    return false;
 }
 
 } // namespace cr
