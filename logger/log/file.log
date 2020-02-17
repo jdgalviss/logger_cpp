@@ -1,0 +1,16 @@
+1 [INFO]: Mon Feb 17 02:14:52 2020:This is an Info example
+2 [WARNING]: Mon Feb 17 02:14:52 2020:This is a Warning example
+1 [INFO]: Mon Feb 17 02:15:30 2020:This is an Info example
+2 [WARNING]: Mon Feb 17 02:15:30 2020:This is a Warning example
+1 [INFO]: Mon Feb 17 02:18:00 2020:This is an Info example
+2 [WARNING]: Mon Feb 17 02:18:00 2020:This is a Warning example
+1 [ERROR]: Mon Feb 17 02:23:44 2020:Logging from thread1
+2 [ERROR]: Mon Feb 17 02:23:44 2020:Logging from thread1
+3 [ERROR]: Mon Feb 17 02:23:44 2020:Logging from thread1
+4 [ERROR]: Mon Feb 17 02:23:44 2020:Logging from thread1
+5 [ERROR]: Mon Feb 17 02:23:44 2020:Logging from thread1
+6 [ERROR]: Mon Feb 17 02:23:44 2020:Logging from thread2
+7 [ERROR]: Mon Feb 17 02:23:44 2020:Logging from thread2
+8 [ERROR]: Mon Feb 17 02:23:44 2020:Logging from thread2
+9 [ERROR]: Mon Feb 17 02:23:44 2020:Logging from thread2
+10 [ERROR]: Mon Feb 17 02:23:44 2020:Logging from thread2

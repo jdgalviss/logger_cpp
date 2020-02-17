@@ -1,2 +1,3 @@
 logger/build/*
 .vscode
+logger/examples/build
