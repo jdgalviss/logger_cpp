@@ -3,7 +3,7 @@ By: Juan David Galvis
 jdgalviss@gmail.com
 All rights reserved
 
-@brief This class defines members to perform thread safe, multilevel
+@brief This header defines classes and members to perform thread safe, multilevel
 logging both to files or to terminal
 */
 
@@ -27,9 +27,7 @@ logging both to files or to terminal
 #define CONFIG_ASSERT_HEADER "[Logger Configuration]: " //Header for internal configuration logs
 #define CONFIG_INTERNAL_LOG_ENABLE true                 //Enable internal logs?
 #define LOG_FILE_DEFAULT std::string(__FILE__).substr( 0, std::string(__FILE__).length() -8  ) + "../log/default.log"  //Careful: depends on current file name        
-//#define LOG_FILE_DEFAULT "Undefined"  //Careful: depends on current file name              
-
-
+//#define LOG_FILE_DEFAULT "Undefined"            
 
 #if (CONFIG_INTERNAL_LOG_ENABLE)                        //If internal logs enabled, define macros
 #define CONFIG_ASSERT(expr, msg) if (!(expr)) { \
@@ -45,13 +43,9 @@ std::cout << internalInfoStream.str();
 
 #define FORMAT_SPECIFIER_CHARACTER '%'              //Characters used to specify when 
 #define VALUE_SPECIFIER_CHARACTER 'v'               //the user wants to add a variable to the log
-#define CONFIG_DEFAULT_PATH std::string(__FILE__).substr( 0, std::string(__FILE__).length() -8  ) + "../config/test.conf" //Careful: depends on current file name   
+#define CONFIG_DEFAULT_PATH std::string(__FILE__).substr( 0, std::string(__FILE__).length() -8  ) + "../config/config.conf" //Careful: depends on current file name   
 
 /*
-By: Juan David Galvis
-jdgalviss@gmail.com
-All rights reserved
-
 @brief This class defines different levels of severity for log
 messages
 */
@@ -93,6 +87,10 @@ class LevelHelper
     }
 };
 
+/*
+@brief This class defines a operator<< in order to
+add color to log msgs depending on their level
+*/
 namespace Color {
     enum Code {
         FG_RED      = 31,
@@ -121,10 +119,6 @@ namespace cr
     typedef Color::Modifier ColorModifier;
 
     /*
-    By: Juan David Galvis
-    jdgalviss@gmail.com
-    All rights reserved
-
     @brief This class defines members used to get the logger
     configuration from a .config file
     */

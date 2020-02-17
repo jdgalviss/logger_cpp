@@ -2,12 +2,11 @@
 #include <thread>
 
 int cr::Logger::log_count_ = 1;
-cr::Logger * logger = new cr::Logger("/home/jdgalviss/logger_cpp/logger/config/config.conf");
+cr::Logger * logger = new cr::Logger();
 
 void PrintLog(const char* msg){
-    for(int i =0;i<5;i++){
+    for(int i =0;i<5;i++)
         logger->Error(msg);
-    }
 }
 
 int main(){

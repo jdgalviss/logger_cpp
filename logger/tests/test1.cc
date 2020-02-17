@@ -15,9 +15,11 @@ All rights reserved
 #include <boost/algorithm/string.hpp>
 
 #define TEST_LINES_TO_WRITE 50
+#define TEST_DEFAULT_PATH std::string(__FILE__).substr( 0, std::string(__FILE__).length() -8  ) + "../config/test.conf" //Careful: depends on current file name   
+
 
 int cr::Logger::log_count_ = 1;
-cr::Logger *logger = new cr::Logger();
+cr::Logger *logger = new cr::Logger(TEST_DEFAULT_PATH);
 std::string log_file = logger->GetLogFile();
 
 int getLineId(std::string *line)
