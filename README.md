@@ -1,4 +1,4 @@
-# Logger library (Connected Robotics test)
+# Logger library
 
 ## Short Description
 
