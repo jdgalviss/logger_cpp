@@ -11,14 +11,29 @@ include_directories(
   ./src
 )
 
-# add the executable
+# add the Logger
 add_executable(Logger src/application.cc
   src/logger.cc
   src/configuration.cc)
 
 target_link_libraries (Logger ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries(Logger stdc++fs)
 
 target_include_directories(Logger PUBLIC
+                           "${PROJECT_BINARY_DIR}"
+                           "${PROJECT_BINARY_DIR}/include"
+                           )
+
+# add the Test
+add_executable(Tests tests/test1.cc
+  src/logger.cc
+  src/configuration.cc)
+
+target_link_libraries (Tests ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries(Tests stdc++fs)
+
+
+target_include_directories(Tests PUBLIC
                            "${PROJECT_BINARY_DIR}"
                            "${PROJECT_BINARY_DIR}/include"
                            )

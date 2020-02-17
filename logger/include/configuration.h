@@ -1,3 +1,11 @@
+/*
+By: Juan David Galvis
+jdgalviss@gmail.com
+All rights reserved
+
+@brief This class defines members used to get the logger
+configuration from a .config file
+*/
 #pragma once
 
 #include <string>
@@ -16,7 +24,7 @@
 #define CONFIG_ASSERT_HEADER "[Logger Configuration]: " //Header for internal configuration logs
 #define CONFIG_INTERNAL_LOG_ENABLE true                 //Enable internal logs?
 
-#if (CONFIG_INTERNAL_LOG_ENABLE) 
+#if (CONFIG_INTERNAL_LOG_ENABLE)                        //If internal logs enabled, define macros
 #define CONFIG_ASSERT(expr, msg) if (!(expr)) { \
 std::stringstream internalInfoStream; internalInfoStream << CONFIG_ASSERT_HEADER << msg; \
 std::cout << internalInfoStream.str(); } 
@@ -31,15 +39,14 @@ std::cout << internalInfoStream.str();
 namespace cr {
     class Configuration{
         public:
-            Configuration();
-            bool ParseFile(const std::string& configuration_file);
-            bool IsToFile();
-            bool IsToTerminal();
-            std::string getLogFileName();
+            Configuration();                            
+            bool ParseFile(const std::string&);     //Function used to get configuration from file
+            bool IsToFile();                        //Returns if logs should be written to file
+            bool IsToTerminal();                    //Returns if logs should be printed in terminal
+            std::string getLogFileName();           //Returns the name of the file where logs should be stored
 
         private:
-            bool parseLine(std::string *line);
-
+            bool parseLine(std::string*);      //Get configuration defined in each line of the .config file
             std::string log_path_;                  //Path to the file where log files will be saved, if log_to_file_ is set to true
             bool log_to_file_ = false;
             bool log_to_terminal_ = true;

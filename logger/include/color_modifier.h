@@ -1,3 +1,12 @@
+/*
+By: Juan David Galvis
+jdgalviss@gmail.com
+All rights reserved
+
+@brief This class defines operator<< to add color 
+to console output stream
+*/
+
 #include <ostream>
 #include "level.h"
 namespace Color {
@@ -11,7 +20,7 @@ namespace Color {
         BG_BLUE     = 44,
         BG_DEFAULT  = 49
     };
-    class Modifier {
+    class Modifier {            
         Code code;
     public:
         Modifier(Code pCode) : code(pCode) {}
