@@ -17,7 +17,7 @@ All rights reserved
 #define TEST_LINES_TO_WRITE 50
 
 int cr::Logger::log_count_ = 1;
-cr::Logger *logger = new cr::Logger("/home/jdgalviss/jdgalviss/testCRJapan/logger_cpp/test.conf");
+cr::Logger *logger = new cr::Logger();
 std::string log_file = logger->GetLogFile();
 
 int getLineId(std::string *line)

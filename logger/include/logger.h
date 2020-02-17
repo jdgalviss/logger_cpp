@@ -17,6 +17,8 @@ logging both to files or to terminal
 
 #define FORMAT_SPECIFIER_CHARACTER '%'              //Characters used to specify when 
 #define VALUE_SPECIFIER_CHARACTER 'v'               //the user wants to add a variable to the log
+#define CONFIG_DEFAULT_PATH std::string(__FILE__).substr( 0, std::string(__FILE__).length() -8  ) + "../config/test.conf" //Careful: depends on current file name   
+
 
 namespace cr
 {
@@ -25,7 +27,7 @@ namespace cr
     {
     public:
         static int log_count_;                          //member used to count total number of messages logged
-        Logger(std::string configuration_file_name);
+        Logger(std::string configuration_file_name = CONFIG_DEFAULT_PATH);
         inline std::string GetLogFile(){return configuration_->getLogFileName();}
 
     //Macro used to create the definitions for the log functions for each level
@@ -52,7 +54,6 @@ namespace cr
         inline std::string GetLogHeader(Level);         //Prewrite the log header with log number, severity and date.
         Configuration *configuration_;                  //Configuration from .config file
         std::mutex mtx_;                                // mutex to guarantee multithreading
-
     };
 
     //definition of inline logging functions for each severity level (this way logging can be called as follows: logger_ptr->Info(...), logger_ptr->Error,...)

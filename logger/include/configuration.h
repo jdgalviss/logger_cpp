@@ -23,6 +23,8 @@ configuration from a .config file
 #define CONFIG_TRUE "true"                              //How true must be written in the .config file
 #define CONFIG_ASSERT_HEADER "[Logger Configuration]: " //Header for internal configuration logs
 #define CONFIG_INTERNAL_LOG_ENABLE true                 //Enable internal logs?
+#define LOG_FILE_DEFAULT std::string(__FILE__).substr( 0, std::string(__FILE__).length() -15  ) + "../log/default.log"  //Careful: depends on current file name              
+
 
 #if (CONFIG_INTERNAL_LOG_ENABLE)                        //If internal logs enabled, define macros
 #define CONFIG_ASSERT(expr, msg) if (!(expr)) { \
@@ -47,7 +49,7 @@ namespace cr {
 
         private:
             bool parseLine(std::string*);      //Get configuration defined in each line of the .config file
-            std::string log_path_;                  //Path to the file where log files will be saved, if log_to_file_ is set to true
+            std::string log_path_ = LOG_FILE_DEFAULT;                  //Path to the file where log files will be saved, if log_to_file_ is set to true
             bool log_to_file_ = false;
             bool log_to_terminal_ = true;
     };
